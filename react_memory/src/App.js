@@ -5,6 +5,8 @@ import ClickCard from './components/ClickCard/ClickCard.js';
 import Footer from './components/Footer/Footer.js';
 import cards from './cards.json';
 
+import './index.css';
+
 
 class App extends Component {
   state = {
@@ -15,11 +17,20 @@ class App extends Component {
     }
 
   clickedCharacter = (id) => {
-    console.log('Character id: ' + id);
+    const pageBody = document.getElementsByTagName('body')[0];
+    const footerUpdate = document.getElementsByClassName('footer-update')[0];
 
     if (this.state.clickedCards.includes(id)) {
       this.setState({score: 0, clickedCards: []})
-      alert('Game Over, Idiot')
+
+      pageBody.classList.add('shakeWrapper')
+      footerUpdate.textContent = 'You picked that already! Start Over.'
+      setTimeout(() => {
+        pageBody.classList.remove('shakeWrapper');
+      }, 500);
+      setTimeout(() => {
+        footerUpdate.textContent = '';
+      }, 1800)
 
     } else {
       this.setState({clickedCards: [...this.state.clickedCards, id]})
@@ -29,13 +40,13 @@ class App extends Component {
 
       } 
       if (this.state.score === 11) {
-        window.confirm('Brilliant! Play again?');
-        this.setState({score: 0, clickedCards: []})
+        footerUpdate.textContent = 'You Won! Play again?';
+        this.setState({score: 0, clickedCards: [], cards: cards})
+        setTimeout(() => {
+          footerUpdate.textContent = '';
+        }, 1800)
       } 
     }
-
-
-
   }
 
   // I copy and pasted this randomize array function from 'Fisher-Yates Shuffle'
@@ -57,13 +68,13 @@ class App extends Component {
 
   renderCards = (array) => {
     return this.state.cards.map(card => (
-      <div className='col s4 m3 l3' key={card.id} id={card.id}>
+      <section className='col s4 m3 l3' key={card.id} id={card.id}>
         <ClickCard
           name={card.name} 
           image={card.image} 
           reArrangeCards={() => {this.reArrangeCards(this.state.cards)}}
           clickedCharacter={() => {this.clickedCharacter(card.id)}}/>
-      </div>
+      </section>
       )
     )
   }
@@ -75,7 +86,7 @@ class App extends Component {
         <Navbar score={this.state.score} topScore={this.state.topScore}/>
         <Modal />
         <br />
-        <div className="container row">
+        <div className="container row cardWrapper">
           {this.renderCards(this.state.cards)}
         </div>
         <Footer />

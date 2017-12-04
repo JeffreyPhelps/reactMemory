@@ -1,17 +1,26 @@
 import React from 'react';
+import './Modal.css';
 
 
 
 function Modal() {
 	return (
-		<div id="modal1" className="modal">
+		<div className="instructionsModal hide">
 			<div className="modal-content">
-				<h4>Game Instructions</h4>
-				<p>A bunch of text</p>
+				<h4 className="center">Game Instructions</h4>
+				<ol>
+					<li>Click on an Image to start the game.</li>
+					<li>Every time you click an image, the images get rearranged.</li>
+					<li>If you pick the same image twice...You Lose!</li>
+					<li>Click all 12 images without repeating...You Win!</li>
+				</ol>
 			</div>
-			<div className="modal-footer">
-				<a href="/" className="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-			</div>
+			<br />
+			<div className="modal-footer white-text center">
+				<a className="waves-effect waves-light btn" onClick={() => {
+					document.getElementsByClassName('instructionsModal')[0].classList.add('hide');
+				}}>Let's Play Already...</a>
+			</div>	
 		</div>
 	)
 }
