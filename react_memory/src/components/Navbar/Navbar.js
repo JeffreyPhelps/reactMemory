@@ -8,7 +8,7 @@ function Navbar(props) {
 	<div className="navbar-fixed">
 		<nav>
 			<div className="nav-wrapper container">
-				<a href='#modal1' className='left' onClick={() => {
+				<a style={{cursor: 'pointer'}}className='left' onClick={() => {
 					document.getElementsByClassName('instructionsModal')[0].classList.remove('hide');
 				}}>Instructions</a>
 				<a href="/" className='brand-logo center'>Memory Game</a>
