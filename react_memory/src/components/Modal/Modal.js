@@ -5,7 +5,7 @@ import './Modal.css';
 
 function Modal() {
 	return (
-		<div className="instructionsModal hide">
+		<div className="instructionsModal">
 			<div className="modal-content">
 				<h4 className="center">Game Instructions</h4>
 				<ol>

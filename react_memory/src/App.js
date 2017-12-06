@@ -13,23 +13,23 @@ class App extends Component {
       cards: cards,
       score: 0,
       topScore: 0,
-      clickedCards: []
+      clickedCards: [],
+      footerText: ""
     }
 
   clickedCharacter = (id) => {
-    const pageBody = document.getElementsByTagName('body')[0];
-    const footerUpdate = document.getElementsByClassName('footer-update')[0];
+    const [pageBody] = document.getElementsByTagName('body');
 
     if (this.state.clickedCards.includes(id)) {
       this.setState({score: 0, clickedCards: []})
 
       pageBody.classList.add('shakeWrapper')
-      footerUpdate.textContent = 'You picked that already! Start Over.'
+      this.setState({footerText: 'You picked that already! Start Over.'})
       setTimeout(() => {
         pageBody.classList.remove('shakeWrapper');
       }, 500);
       setTimeout(() => {
-        footerUpdate.textContent = '';
+        this.setState({footerText: ""})
       }, 1800)
 
     } else {
@@ -40,10 +40,10 @@ class App extends Component {
 
       } 
       if (this.state.score === 11) {
-        footerUpdate.textContent = 'You Won! Play again?';
+        this.setState({footerText: 'You Won! Play again?'})
         this.setState({score: 0, clickedCards: [], cards: cards})
         setTimeout(() => {
-          footerUpdate.textContent = '';
+          this.setState({footerText: ''})
         }, 1800)
       } 
     }
@@ -89,7 +89,7 @@ class App extends Component {
         <div className="container row cardWrapper">
           {this.renderCards(this.state.cards)}
         </div>
-        <Footer />
+        <Footer text={this.state.footerText}/>
       </div>
     );
   }

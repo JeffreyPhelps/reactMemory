@@ -1,21 +1,17 @@
 .card {
-  height: 130px;
+  height: 120px;
   background: #6CADDC;
   cursor: pointer;
   transition: all .2s ease-in-out;
+  overflow: hidden;
+  padding: 10px;
+  text-align: center;
 }
 
 .card:hover {
 	transform: scale(1.06);
 }
 
-.card > .img-container {
-  padding: 10px;
-  height: 120px;
-  overflow: hidden;
-  text-align: center;
-  
-}
-.card > .img-container > img {
+img {
   width: 60%;
 }
